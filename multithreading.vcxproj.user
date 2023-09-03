@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>text.txt text1.txt text2.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>text.txt text(1).txt text(2).txt text(3).txt text(4).txt text(5).txt text(6).txt text(7).txt text(8).txt text(9).txt text(10).txt text(11).txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerCommandArguments>text.txt text1.txt text2.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>text.txt text(1).txt text(2).txt text(3).txt text(4).txt text(5).txt text(6).txt text(7).txt text(8).txt text(9).txt text(10).txt text(11).txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>text.txt text1.txt text2.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>text.txt text(1).txt text(2).txt text(3).txt text(4).txt text(5).txt text(6).txt text(7).txt text(8).txt text(9).txt text(10).txt text(11).txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>text.txt text1.txt text2.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>text.txt text(1).txt text(2).txt text(3).txt text(4).txt text(5).txt text(6).txt text(7).txt text(8).txt text(9).txt text(10).txt text(11).txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
