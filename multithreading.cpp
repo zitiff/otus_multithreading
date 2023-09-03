@@ -1,5 +1,4 @@
 ﻿// Read files and prints top k word by frequency
-
 #include <algorithm>
 #include <cctype>
 #include <cstdlib>
@@ -10,8 +9,11 @@
 #include <map>
 #include <vector>
 #include <chrono>
+#include <thread>
+#include <mutex>
 
 const size_t TOPK = 10;
+std::mutex counter_mutex;
 
 using Counter = std::map<std::string, std::size_t>;
 
@@ -29,13 +31,27 @@ int main(int argc, char* argv[]) {
 
     auto start = std::chrono::high_resolution_clock::now();
     Counter freq_dict;
+
+    std::vector<std::thread> threads;
     for (int i = 1; i < argc; ++i) {
-        std::ifstream input{ argv[i] };
-        if (!input.is_open()) {
-            std::cerr << "Failed to open file " << argv[i] << '\n';
-            return EXIT_FAILURE;
-        }
-        count_words(input, freq_dict);
+        threads.emplace_back([&freq_dict, &argv, i]() {
+            std::ifstream input{ argv[i] };
+            if (!input.is_open()) {
+                std::cerr << "Failed to open file " << argv[i] << '\n';
+                return;
+            }
+            Counter local_dict;
+            count_words(input, local_dict);
+            std::lock_guard<std::mutex> lock(counter_mutex);
+            for (const auto& item : local_dict) {
+                freq_dict[item.first] += item.second;
+            }
+            });
+    }
+
+    // Wait for all threads to finish
+    for (auto& t : threads) {
+        t.join();
     }
 
     print_topk(std::cout, freq_dict, TOPK);
@@ -55,7 +71,10 @@ std::string tolower(const std::string& str) {
 void count_words(std::istream& stream, Counter& counter) {
     std::for_each(std::istream_iterator<std::string>(stream),
         std::istream_iterator<std::string>(),
-        [&counter](const std::string& s) { ++counter[tolower(s)]; });
+        [&counter](const std::string& s) {
+            std::lock_guard<std::mutex> lock(counter_mutex);
+            ++counter[tolower(s)];
+        });
 }
 
 void print_topk(std::ostream& stream, const Counter& counter, const size_t k) {
