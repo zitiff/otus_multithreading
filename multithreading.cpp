@@ -72,8 +72,7 @@ void count_words(std::istream& stream, Counter& counter) {
     std::for_each(std::istream_iterator<std::string>(stream),
         std::istream_iterator<std::string>(),
         [&counter](const std::string& s) {
-            std::lock_guard<std::mutex> lock(counter_mutex);
-            ++counter[tolower(s)];
+        ++counter[tolower(s)];
         });
 }
 
